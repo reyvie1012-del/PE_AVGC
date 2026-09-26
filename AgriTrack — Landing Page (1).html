@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AgriTrack — Farm Production & Marketing System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF7F0;
+    --ink:#1C1B15;
+    --green:#1F3421;
+    --green-2:#2E4A31;
+    --gold:#D6A234;
+    --clay:#8C5A3C;
+    --line:#D8D0BC;
+    --card:#F1ECDE;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:inherit;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    margin:0;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  a{color:inherit;}
+
+  header.site{
+    padding:22px env(safe-area-inset-top,0px);
+    padding-top:calc(22px + env(safe-area-inset-top,0px));
+    border-bottom:1px solid var(--line);
+  }
+  .site header, header.site .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;letter-spacing:.01em;}
+  .brand-mark{width:26px;height:26px;flex:none;}
+  nav.links{display:flex;gap:28px;font-size:.94rem;color:var(--green-2);}
+  nav.links a{text-decoration:none;}
+  nav.links a:hover{text-decoration:underline;}
+
+  .hero{
+    padding:88px 0 76px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem,5vw,3.6rem);
+    line-height:1.06;
+    letter-spacing:-.01em;
+    color:var(--green);
+  }
+  .hero p.lede{
+    margin:22px 0 0;
+    max-width:46ch;
+    font-size:1.12rem;
+    color:#3A392E;
+  }
+  .hero-cta{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:13px 24px;border-radius:3px;
+    font-size:.98rem;font-weight:500;text-decoration:none;
+    border:1px solid var(--green);
+  }
+  .btn.primary{background:var(--green);color:#F6F1E4;}
+  .btn.ghost{background:transparent;color:var(--green);}
+
+  .field{
+    background:var(--card);border:1px solid var(--line);border-radius:4px;
+    padding:26px;
+  }
+  .field .stamp{
+    font-size:.82rem;color:var(--clay);margin-bottom:14px;
+  }
+  .field dl{margin:0;display:grid;grid-template-columns:1fr auto;row-gap:10px;font-size:.95rem;}
+  .field dt{color:#5A5847;}
+  .field dd{margin:0;text-align:right;font-weight:500;color:var(--green-2);}
+  .field hr{border:none;border-top:1px solid var(--line);grid-column:1/-1;margin:6px 0;}
+
+  section{padding:72px 0;border-bottom:1px solid var(--line);}
+  .kicker{color:var(--clay);font-size:.95rem;margin-bottom:10px;}
+  .section-head{max-width:60ch;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.2rem);color:var(--green);}
+  .section-head p{margin:14px 0 0;color:#3A392E;max-width:56ch;}
+
+  .problem-grid{
+    margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border-top:1px solid var(--line);
+  }
+  .problem-grid > div{
+    padding:26px 24px;border-right:1px solid var(--line);
+  }
+  .problem-grid > div:last-child{border-right:none;}
+  .problem-grid h3{font-size:1.05rem;font-family:'IBM Plex Sans';font-weight:600;color:var(--green-2);}
+  .problem-grid p{margin:10px 0 0;font-size:.94rem;color:#4A4839;}
+
+  .features{margin-top:46px;}
+  .feature-group{margin-bottom:40px;}
+  .feature-group h3{
+    font-size:1rem;font-family:'IBM Plex Sans';font-weight:600;
+    color:var(--clay);border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:0;
+  }
+  .feature-row{
+    display:grid;grid-template-columns:220px 1fr;gap:24px;
+    padding:20px 0;border-bottom:1px solid var(--line);
+  }
+  .feature-row:last-child{border-bottom:none;}
+  .feature-row h4{margin:0;font-family:'Fraunces',serif;font-weight:600;font-size:1.08rem;color:var(--green);}
+  .feature-row p{margin:0;color:#3A392E;font-size:.96rem;}
+
+  .flow{margin-top:46px;display:flex;gap:0;align-items:stretch;flex-wrap:wrap;}
+  .flow > div{flex:1 1 220px;padding:24px;background:var(--card);border:1px solid var(--line);}
+  .flow > div + div{border-left:none;}
+  .flow h4{font-family:'IBM Plex Sans';font-weight:600;font-size:.92rem;color:var(--clay);margin-bottom:10px;}
+  .flow p{margin:0;font-size:.92rem;color:#3A392E;}
+  .flow ul{margin:0;padding-left:18px;font-size:.9rem;color:#3A392E;display:grid;gap:7px;}
+  .flow li{line-height:1.4;}
+  .flow-arrow{display:flex;align-items:center;justify-content:center;padding:0 6px;color:var(--green-2);font-size:1.3rem;flex:0 0 auto;}
+
+  .cta{
+    text-align:left;
+  }
+  .cta-box{
+    background:var(--green);color:#F6F1E4;border-radius:4px;
+    padding:52px 48px;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;
+  }
+  .cta-box h2{color:#F6F1E4;font-size:clamp(1.5rem,3vw,2rem);max-width:34ch;}
+  .cta-box .btn.primary{background:var(--gold);border-color:var(--gold);color:#241C08;}
+  .cta-box .btn.ghost{border-color:#F6F1E4;color:#F6F1E4;}
+
+  footer{padding:32px 0 calc(32px + env(safe-area-inset-bottom,0px));font-size:.85rem;color:#6B6952;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#161611;--ink:#EDE9DA;--card:#1F2018;--line:#37362A;
+      --green:#8FBF93;--green-2:#9FCBA0;--gold:#E3B75A;--clay:#C08A62;
+    }
+    :root:not([data-theme="light"]) .hero-cta .btn.primary,
+    :root:not([data-theme="light"]) .btn.primary{color:#161611;}
+    :root:not([data-theme="light"]) .cta-box{background:#22301F;}
+  }
+  :root[data-theme="dark"]{
+    --bg:#161611;--ink:#EDE9DA;--card:#1F2018;--line:#37362A;
+    --green:#8FBF93;--green-2:#9FCBA0;--gold:#E3B75A;--clay:#C08A62;
+  }
+
+  @media (max-width:820px){
+    .hero-grid{grid-template-columns:1fr;gap:36px;}
+    .problem-grid{grid-template-columns:1fr;}
+    .problem-grid > div{border-right:none;border-bottom:1px solid var(--line);}
+    .feature-row{grid-template-columns:1fr;gap:6px;}
+    .flow{flex-direction:column;}
+    .flow-arrow{transform:rotate(90deg);padding:4px 0;}
+    nav.links{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21c-4-3-7-6.5-7-10.5A7 7 0 0112 3a7 7 0 017 7.5C19 14.5 16 18 12 21z" fill="#D6A234"/>
+        <path d="M12 21V9" stroke="#1F3421" stroke-width="1.4"/>
+      </svg>
+      AgriTrack
+    </div>
+    <nav class="links">
+      <a href="#problem">Why it matters</a>
+      <a href="#features">Features</a>
+      <a href="#flow">How it works</a>
+    </nav>
+    <a href="https://claude.ai/artifact/SLz3UPQEgyat4NP2vyu1Xj" target="_blank" rel="noopener" class="btn primary" style="padding:9px 18px;font-size:.88rem;">Enter the system</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Every harvest tracked. Every sale, fairer.</h1>
+      <p class="lede">AgriTrack replaces notebooks, spreadsheets, and roadside haggling with one web-based system for farm production monitoring and agricultural marketing — built for AgriTrack Farm, Tupi, South Cotabato.</p>
+      <div class="hero-cta">
+        <a href="https://claude.ai/artifact/SLz3UPQEgyat4NP2vyu1Xj" target="_blank" rel="noopener" class="btn primary">Enter the system</a>
+        <a href="#features" class="btn ghost">See what it does</a>
+      </div>
+    </div>
+    <div class="field">
+      <div class="stamp">Sample farm ledger — before AgriTrack</div>
+      <dl>
+        <dt>Planting record</dt><dd>Handwritten notebook</dd><hr>
+        <dt>Harvest tally</dt><dd>Compiled by hand, per cycle</dd><hr>
+        <dt>Supply stock</dt><dd>Checked in person</dd><hr>
+        <dt>Selling price</dt><dd>Negotiated at the market</dd><hr>
+        <dt>Buyer reach</dt><dd>Local traders only</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Why it matters</div>
+      <h2>Paper records cost farmers money</h2>
+      <p>Manual logbooks and verbal price deals leave production data incomplete and farmers underpaid — long after the harvest is already in.</p>
+    </div>
+    <div class="problem-grid">
+      <div>
+        <h3>Records get lost</h3>
+        <p>Notebooks are damaged by weather and pests, and errors go unnoticed until reports are due.</p>
+      </div>
+      <div>
+        <h3>Reporting lags behind</h3>
+        <p>Technicians spend days consolidating scattered logs before anyone can see the real numbers.</p>
+      </div>
+      <div>
+        <h3>Farmers underprice</h3>
+        <p>Without market visibility or direct buyer access, traders set the terms — and the price.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">What's inside</div>
+      <h2>One system, from planting to sale</h2>
+      <p>Eleven features split across two jobs: keeping production organized, and getting produce to buyers at a fair price.</p>
+    </div>
+
+    <div class="features">
+      <div class="feature-group">
+        <h3>Monitor the farm</h3>
+        <div class="feature-row">
+          <h4>Farmer registration & profile</h4>
+          <p>Farmers sign up once and keep personal and farm details current.</p>
+        </div>
+        <div class="feature-row">
+          <h4>Batch crop planner</h4>
+          <p>Organize and schedule planting activities batch by batch.</p>
+        </div>
+        <div class="feature-row">
+          <h4>Farm supply ledger</h4>
+          <p>Track seeds, fertilizers, pesticides, and other inputs in one place.</p>
+        </div>
+        <div class="feature-row">
+          <h4>Low stock notification</h4>
+          <p>Get warned automatically before supplies run out.</p>
+        </div>
+        <div class="feature-row">
+          <h4>Pest & disease outbreak alert</h4>
+          <p>See warnings based on reported incidents and environmental data.</p>
+        </div>
+        <div class="feature-row">
+          <h4>Predictive asset procurement</h4>
+          <p>Forecast future supply and equipment needs from past production cycles.</p>
+        </div>
+      </div>
+
+      <div class="feature-group">
+        <h3>Sell the harvest</h3>
+        <div class="feature-row">
+          <h4>Market price fluctuation estimator</h4>
+          <p>Check current and historical prices before deciding when to sell.</p>
+        </div>
+        <div class="feature-row">
+          <h4>Price adjuster</h4>
+          <p>Set and update product prices based on market trends and costs.</p>
+        </div>
+        <div class="feature-row">
+          <h4>B2B demand prediction</h4>
+          <p>Anticipate bulk buyer demand from historical sales and buyer data.</p>
+        </div>
+        <div class="feature-row">
+          <h4>Pre-order futures matchmaking</h4>
+          <p>Connect with bulk buyers ahead of harvest through advance orders.</p>
+        </div>
+        <div class="feature-row">
+          <h4>Anomaly detection pipeline</h4>
+          <p>Flag unusual patterns in production or sales data for admin review.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="flow">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">How it works</div>
+      <h2>Input, process, output</h2>
+      <p>Farm data goes in, AgriTrack does the accounting, and farmers get records, alerts, and reports back out.</p>
+    </div>
+    <div class="flow">
+      <div>
+        <h4>Input</h4>
+        <ul>
+          <li>Farmer personal and farm information</li>
+          <li>Crop planting schedules and batch data</li>
+          <li>Farm supply inventory data</li>
+          <li>Supply threshold settings</li>
+          <li>Pest and disease incident reports</li>
+          <li>Production cycle and asset data</li>
+        </ul>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div>
+        <h4>Process</h4>
+        <ul>
+          <li>Farmer registration and validation</li>
+          <li>Batch crop planning and scheduling</li>
+          <li>Supply ledger recording and monitoring</li>
+          <li>Low stock detection and alert generation</li>
+          <li>Outbreak analysis and alert processing</li>
+          <li>Predictive asset procurement computation</li>
+        </ul>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div>
+        <h4>Output</h4>
+        <ul>
+          <li>Farmer profile and account</li>
+          <li>Batch crop plans</li>
+          <li>Farm supply inventory records</li>
+          <li>Low stock notifications</li>
+          <li>Pest and disease alerts</li>
+          <li>Production and sales reports</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>Built for AgriTrack Farm, Tupi, South Cotabato.</h2>
+      <div class="hero-cta">
+        <a href="https://claude.ai/artifact/SLz3UPQEgyat4NP2vyu1Xj" target="_blank" rel="noopener" class="btn primary">Enter the system</a>
+        <a href="#features" class="btn ghost">Review the features</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>AgriTrack — Farm Production Monitoring & Agricultural Marketing System</span>
+    <span>Web-based · offline payments · internet connection required</span>
+  </div>
+</footer>
+
+</body>
+</html>
